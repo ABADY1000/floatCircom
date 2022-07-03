@@ -8,7 +8,6 @@ template Decode(en,mn){
     signal input f;
     signal output s;
     signal output e[en];
-<<<<<<< HEAD
     signal output m[mn+1];
     signal output exponent;
     signal output mantissa;
@@ -16,15 +15,6 @@ template Decode(en,mn){
     component fb = Num2Bits(en+mn+1);
     component exponentC = Bits2Num(en);
     component mantissaC = Bits2Num(mn);
-=======
-    signal output m[mn];
-    signal output exponent;
-    signal output mantissa;
-
-    component exponentC = Bits2Num(8);
-    component mantissaC = Bits2Num(23);
-
->>>>>>> 568644e7ab36ea39762fb359210e2f763c0fc777
 
     fb.in <== f;
     
