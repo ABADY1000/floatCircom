@@ -115,7 +115,7 @@ template fadd(){
     component Pe = pe(32);
     Pe.integer <== fm;
     signal d <== 24-Pe.o-1;
-    log(d);
+    // log(d);
 
 
     component fm2bits = Num2Bits(25);
@@ -140,7 +140,7 @@ template fadd(){
     exp_mux.s <== fm2bits.out[24];
 
     component step2_exp_mux = Mux1();
-    log(greate);
+    // log(greate);
     step2_exp_mux.c[0] <-- greate-d;
     step2_exp_mux.c[1] <== exp_mux.out;
     step2_exp_mux.s <== sameSign.out;
@@ -187,7 +187,7 @@ template fadd(){
     signMux.s <== mux1.out;
     full.in[31] <== signMux.out;
 
-    log(full.out);
+    // log(full.out);
     fo <== full.out;
 }
 

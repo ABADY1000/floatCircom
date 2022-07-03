@@ -29,9 +29,9 @@ template lessThanF(e,m){
     // Mless.in[0] <== decode1.mantissa;
     // Mless.in[1] <== decode2.mantissa;
     
-    component Eless = LessThan(e);
-    Eless.in[0] <== decode1.exponent;
-    Eless.in[1] <== decode2.exponent;
+    // component Eless = LessThan(e);
+    // Eless.in[0] <== decode1.exponent;
+    // Eless.in[1] <== decode2.exponent;
 
     component Mless = LessThan(m);
     Mless.in[0] <== decode1.mantissa;
@@ -43,9 +43,6 @@ template lessThanF(e,m){
     mux1.s <== Eeq.out;
     r <== mux1.out;
 }
-component main = lessThenF(8,23);
-
-
 
 // !(A < B+1)
 template greaterThanF(e,m){
@@ -65,6 +62,4 @@ template greaterThanF(e,m){
     r <== 1-less.r;
 }
 
-
-
-
+// component main = lessThenF(8,23);

@@ -31,7 +31,7 @@ async function tester(){
             });
 
             await circuit.checkConstraints(w);
-            console.log(w);
+            // console.log(w);
 
             const output = w[1];
                         
