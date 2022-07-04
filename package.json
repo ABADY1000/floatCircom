@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server .",
-    "build": "npm run ccompile -- add GreaterThan i2f LessThan multiply",
+    "build": "npm run ccompile -- add GreaterThan i2f LessThan multiply inRange isEqualExact isEqualError negate",
     "test": "npx mocha",
     "ccompile": "bash ./scripts/compile.sh"
   },
