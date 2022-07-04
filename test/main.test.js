@@ -416,6 +416,68 @@ async function tester(){
             assert.ok(o == f64tf32(-p));
         });
     });
+
+    describe("Test Integer to Float conversion", async ()=>{
+        it("Convert zero", async ()=>{
+            let p = -0.00023;
+            const circuit = await wasm_tester(NEGATE_PATH);
+            const w = await circuit.calculateWitness({
+                f: Number2Float32Bytes(p)
+            });
+            await circuit.checkConstraints(w);
+            const output = w[1];
+            const o = Float32Bytes2Number(output);
+            assert.ok(o == f64tf32(-p));
+        });
+
+        it("Convert positive integer", async ()=>{
+            let p = -0.00023;
+            const circuit = await wasm_tester(NEGATE_PATH);
+            const w = await circuit.calculateWitness({
+                f: Number2Float32Bytes(p)
+            });
+            await circuit.checkConstraints(w);
+            const output = w[1];
+            const o = Float32Bytes2Number(output);
+            assert.ok(o == f64tf32(-p));
+        });
+
+        it("Convert large intger (<32bit)", async ()=>{
+            let p = -0.00023;
+            const circuit = await wasm_tester(NEGATE_PATH);
+            const w = await circuit.calculateWitness({
+                f: Number2Float32Bytes(p)
+            });
+            await circuit.checkConstraints(w);
+            const output = w[1];
+            const o = Float32Bytes2Number(output);
+            assert.ok(o == f64tf32(-p));
+        });
+
+        it("Convert large intger (>32bit)", async ()=>{
+            let p = -0.00023;
+            const circuit = await wasm_tester(NEGATE_PATH);
+            const w = await circuit.calculateWitness({
+                f: Number2Float32Bytes(p)
+            });
+            await circuit.checkConstraints(w);
+            const output = w[1];
+            const o = Float32Bytes2Number(output);
+            assert.ok(o == f64tf32(-p));
+        });
+
+        it("Convert negative integer", async ()=>{
+            let p = -0.00023;
+            const circuit = await wasm_tester(NEGATE_PATH);
+            const w = await circuit.calculateWitness({
+                f: Number2Float32Bytes(p)
+            });
+            await circuit.checkConstraints(w);
+            const output = w[1];
+            const o = Float32Bytes2Number(output);
+            assert.ok(o == f64tf32(-p));
+        });
+    });
 }
 
 
