@@ -189,8 +189,8 @@ async function tester(){
     describe("Test Comparators", async ()=>{
        
         it("Less Than...True", async ()=>{
-            let p1 = 4.2;
-            let p2 = 11.25;
+            let p1 = 10;
+            let p2 = 10.001;
 
             const circuit = await wasm_tester(LESSTHAN_PATH);
             const w = await circuit.calculateWitness({
@@ -223,10 +223,10 @@ async function tester(){
         })
 
         it("Greater Than...True", async ()=>{
-            let p1 = 20.5;
+            let p1 = 20.2501;
             let p2 = 20.25;
 
-            const circuit = await wasm_tester(LESSTHAN_PATH);
+            const circuit = await wasm_tester(GREATERTHAN_PATH);
             const w = await circuit.calculateWitness({
                 f1: Number2Float32Bytes(p1),
                 f2: Number2Float32Bytes(p2)
@@ -236,14 +236,14 @@ async function tester(){
             const output = w[1];
                         
             
-            assert.ok(output == 0);
+            assert.ok(output == 1);
         })
 
         it("Greater Than...False", async ()=>{
-            let p1 = 20.5;
-            let p2 = 20.25;
+            let p1 = 20.25;
+            let p2 = 20.5;
 
-            const circuit = await wasm_tester(LESSTHAN_PATH);
+            const circuit = await wasm_tester(GREATERTHAN_PATH);
             const w = await circuit.calculateWitness({
                 f1: Number2Float32Bytes(p1),
                 f2: Number2Float32Bytes(p2)

@@ -44,22 +44,64 @@ template lessThanF(e,m){
     r <== mux1.out;
 }
 
-// !(A < B+1)
 template greaterThanF(e,m){
     signal input f1;
     signal input f2;
     signal output r;
 
-    component add = fadd();
-    signal float_one <== 0xf3800000;
-    add.f1 <== float_one;
-    add.f2 <== f2;
+    component decode1 = Decode(e,m);
+    decode1.f <== f1;
+
+    component decode2 = Decode(e,m);
+    decode2.f <== f2;
+
+    component Eless = GreaterThan(e);
+    Eless.in[0] <== decode1.exponent;
+    Eless.in[1] <== decode2.exponent;
+
+    component Eeq = IsEqual();
+    Eeq.in[0] <== decode1.exponent;
+    Eeq.in[1] <== decode2.exponent;
+
+    component Mless = GreaterThan(m);
+    Mless.in[0] <== decode1.mantissa;
+    Mless.in[1] <== decode2.mantissa;
+
+    component mux1 = Mux1();
+    mux1.c[0] <== Eless.out;
+    mux1.c[1] <== Mless.out;
+    mux1.s <== Eeq.out;
+    r <== mux1.out;
+}
+
+// !(A < B+1)
+// template greaterThanF(e,m){
+//     signal input f1;
+//     signal input f2;
+//     signal output r;
+
+//     component add = fadd();
+//     signal float_one <== 0x00800001;
+//     add.f1 <== float_one;
+//     add.f2 <== f2;
+
+//     component less = lessThanF(e,m);
+//     less.f1 <== f1;
+//     less.f2 <== add.fo;
+
+//     r <== 1-less.r;
+// }
+
+template inRange(e,m){
+    signal input f;
+    signal input Urange;
+    signal input Lrange;
+    signal output r;
 
     component less = lessThanF(e,m);
-    less.f1 <== f1;
-    less.f2 <== add.fo;
+    component greater = greaterThanF(e,m);
 
-    r <== 1-less.r;
+    // less.
 }
 
 // component main = lessThenF(8,23);
