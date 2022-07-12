@@ -31,8 +31,7 @@ async function tester(){
             });
 
             await circuit.checkConstraints(w);
-            console.log(w);
-
+            
             const output = w[1];
                         
             const rate = f32Mul(p1,p2)/Float32Bytes2Number(output);
