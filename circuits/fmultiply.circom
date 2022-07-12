@@ -75,14 +75,22 @@ template fmultiply(){
     
     // (|A)&(|B)
     component and = AND();
-    and.a <== 1-f1eOr.out;
-    and.b <== 1-f2eOr.out;
+    and.a <== f1eOr.out;
+    and.b <== f2eOr.out;
     
     // if (|A)&(|B) then A+B-127 else 0
     component mux_zero_exp = Mux1();
     mux_zero_exp.c[0] <== exp;
     mux_zero_exp.c[1] <== 0x00;
-    mux_zero_exp.s <== and.out;
+    mux_zero_exp.s <== 1-and.out;
+    log(mux_zero_exp.out);
+    /*
+    A B `A `B| `A&`B  1-(`A&`B)
+    0 0  1  1|   1     0
+    0 1  1  0|   0     1
+    1 0  0  1|   0     1
+    1 1  0  0|   0     1
+    */
 
     // (&A)|(&B)
     component or = OR();
@@ -122,12 +130,24 @@ template fmultiply(){
     mux.c[1] <== C.out;
     mux.s <== bits.out[47];
     
+    //
+
+    // component isZeroExp = IsZero | and.out
+    component zero_mul = Mux1();
+    zero_mul.c[0] <== mux.out;
+    zero_mul.c[1] <== 0x00;
+    zero_mul.s <== 1-and.out;
+    log(zero_mul.out);
+    
+    //
+
     // Combine both parts
     component foe = Num2Bits(8);
     component fom = Num2Bits(23);
     component f   = Bits2Num(32);
 
-    fom.in <== mux.out;
+    // fom.in <== mux.out;
+    fom.in <== zero_mul.out;
     foe.in <== oexp;
     f.in[31] <== s;
     for(i=0; i<8; i++){
