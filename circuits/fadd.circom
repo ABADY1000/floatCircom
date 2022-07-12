@@ -102,6 +102,7 @@ template fadd(){
     component greaterMantissaSelector = Mux1();
     greaterMantissaSelector.c[0] <== m1-m2;
     greaterMantissaSelector.c[1] <== m2-m1;
+
     greaterMantissaSelector.s <== lessM.out;
     // log(lessM.out);
     // singSelector.c[0] <== m1-m2;
@@ -196,5 +197,4 @@ template fadd(){
     -5 + -2 = -7
     -5 +  2 = -3
      5 + -2 =  3
-
 */

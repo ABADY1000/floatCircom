@@ -60,6 +60,9 @@ def fadd(a: float, b: float):
     # print("{:>60}".format(bin(mbm)))
     m = (mam + mbm) if same_sign else mbm-mam if is_malthb else mam-mbm
 
+    print(f"mam:{hex(mam)}")
+    print(f"mbm:{hex(mbm)}")
+
     # print(f'{hex(mam):>10}')
     # print(f'{hex(mbm):>10}')
     # print(f'{hex(m):>10}')

@@ -3,20 +3,39 @@ pragma circom 2.0.4;
 include "../node_modules/circomlib/circuits/gates.circom";
 include "../node_modules/circomlib/circuits/bitify.circom";
 
+template Encode(en,mn){
+    signal input s;
+    signal input e[en];
+    signal input m[mn+1];
+    signal output out;
+
+    component full = Bits2Num(mn+en+1);
+    
+    for(var i=0; i<mn; i++){
+        full.in[i] <== m[i];
+    }
+
+    for(var i=0; i<en; i++){
+        full.in[i+mn] <== e[i];
+    }
+
+    full.in[en+mn] <== s;
+
+    out <== full.out;
+}
 
 template Decode(en,mn){
     signal input f;
     signal output s;
     signal output e[en];
-    signal output m[mn];
+    signal output m[mn+1];
     signal output exponent;
     signal output mantissa;
 
-    component exponentC = Bits2Num(8);
-    component mantissaC = Bits2Num(23);
+    component fb = Num2Bits(en+mn+1);
+    component exponentC = Bits2Num(en);
+    component mantissaC = Bits2Num(mn);
 
-
-    component fb = Num2Bits(32);
     fb.in <== f;
     
     var i;
