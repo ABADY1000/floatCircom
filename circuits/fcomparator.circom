@@ -99,7 +99,6 @@ template inRange(e,m){
     r <== and.out;
 }
 
-
 template isEqualExact(){
     signal input f1;
     signal input f2;
@@ -113,7 +112,6 @@ template isEqualExact(){
 }
 
 // 0.001 >>> 1/1000
-
 template isEqualError(p){ // accuracy rate, p is divided by 1000, 1 is 0.001 or 0.1%, 1000 is 1 or 100%
     signal input f1;
     signal input f2;
@@ -155,4 +153,4 @@ template isEqualError(p){ // accuracy rate, p is divided by 1000, 1 is 0.001 or 
 
     r <== range.r;
 }
-// component main = lessThenF(8,23);
+
